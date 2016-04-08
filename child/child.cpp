@@ -16,8 +16,8 @@ class MyApp: public wxApp
 
 class MyFrame: public wxFrame
 {
-  wxSciterControl* m_sciter;
 public:
+  wxSciterControl* m_sciter;
 
   MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
 
@@ -46,7 +46,7 @@ IMPLEMENT_APP(MyApp);
 bool MyApp::OnInit()
 {
   SciterClassName();
-  MyFrame *frame = new MyFrame( "Hello World", wxPoint(50,50), wxSize(600,550) );
+  MyFrame *frame = new MyFrame( "Sciter integration for wxWidgets", wxPoint(50,50), wxSize(600,550) );
   frame->Show(TRUE);
   SetTopWindow(frame);
   return TRUE;
@@ -83,7 +83,7 @@ void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 
 void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
-  wxMessageBox("This is a wxWindows Hello world sample", "About Hello World", wxOK | wxICON_INFORMATION, this);
+  wxMessageBox("This is a wxWindows + Sciter child control sample", "About", wxOK | wxICON_INFORMATION, this);
 }
 
 void MyFrame::OnOpen(wxCommandEvent& event)
@@ -95,4 +95,5 @@ void MyFrame::OnOpen(wxCommandEvent& event)
 
   const wxString path = "file:///" + dlg.GetPath();
   m_sciter->load_file(path.ToStdWstring().c_str());
+  this->SetStatusText(dlg.GetPath());
 }
